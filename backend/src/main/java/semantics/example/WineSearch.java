@@ -38,7 +38,7 @@ public class WineSearch {
     port(3000);
     staticFiles.externalLocation("public");
 
-    model = new LambdaModel();
+    model = new SparqlModel();
 
     ResponseTransformer rt = model.getResponseTransformer();
     get("/criteria",    this::criteria, rt);

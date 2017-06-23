@@ -4,30 +4,25 @@ apply plugin: 'application'
 
 repositories {
   mavenCentral()
-  flatDir {
-    dirs '.'
+  maven {
+    url 'http://maven.stardog.com'
   }
 }
 
 dependencies {
   compile 'com.sparkjava:spark-core:2.6.0'
   compile 'org.slf4j:slf4j-simple:1.7.13'
-  compile name: 'jastics'
+  compile 'com.complexible.stardog:client-snarl:4.2.4'
 }
 
 sourceCompatibility = '1.8'
 mainClassName       = 'semantics.example.WineSearch'
 
 
-compileJava {
-  options.fork = true
-  options.forkOptions.executable = './javac.sh'
-}
-
 sourceSets {
   main {
     java {
-      exclude('**/SparqlModel.java')
+      exclude('**/LambdaModel.java')
     }
   }
 }
