@@ -1,0 +1,22 @@
+<template>
+
+  <button class="list-group-item" click.trigger="onClick(wine)">
+    ${id | humanize}
+    <span show.bind="loading" class="fa fa-circle-o-notch fa-spin"></span>
+  </button>
+
+  <div class="wine-details list-group-item au-animate" if.bind="expandDetails">
+    ${details.sugar | humanize | hyphenize}
+    ${details.color | humanize} Wine,
+    produced by ${details.maker | humanize}
+    from the ${details.region | humanize}.
+    ${details.body | humanize} body,
+    ${details.flavor | humanize} flavor.
+  </div>
+
+  <div class="list-group-item list-group-item-danger au-animate"
+       if.bind="expandError">
+    ${error.statusText}
+  </div>
+
+</template>

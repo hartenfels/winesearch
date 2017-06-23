@@ -1,0 +1,26 @@
+body {
+  overflow-y : scroll;
+}
+
+.btn {
+  font-size      : 14px;
+  text-transform : none;
+}
+
+button.list-group-item:focus {
+  background-color : #ffffff;
+  color            : #3e3f3a;
+}
+
+button.list-group-item:focus:hover {
+  background-color : #f8f5f0;
+}
+
+.wine-details {
+  background-color : rgba(248, 245, 240, 0.4);
+  padding-left     : 3em;
+}
+
+.with-headroom {
+  margin-top : 1em;
+}

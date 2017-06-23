@@ -1,0 +1,85 @@
+<template>
+  <require from="./app.css"></require>
+  <require from="./widgets/wine"></require>
+  <require from="./widgets/criterion"></require>
+
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1>wineseλrch</h1>
+
+      <p>
+        A semantic sample application for the
+        <a href="http://softlang.wikidot.com/">Software Languages Team</a> and
+        <a href="https://west.uni-koblenz.de/lambda-dl">Institute for Web
+        Science</a> at the
+        <a href="https://www.uni-koblenz-landau.de/en">University of
+        Koblenz-Landau</a>.
+      </p>
+
+      <p>
+        Based on <a href="https://west.uni-koblenz.de/lambda-dl">λ-DL</a>. You
+        can find <a href="https://github.com/hartenfels/winesearch">this
+        application on GitHub</a>.
+      </p>
+
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="alert alert-danger" if.bind="criteriaError">
+      <span class="fa fa-exclamation-triangle"></span>
+      <strong>Can't load criteria:</strong> ${criteriaError.statusText}.
+    </div>
+
+    <div class="alert alert-danger" if.bind="winesError">
+      <span class="fa fa-exclamation-triangle"></span>
+      <strong>Can't load wines:</strong> ${winesError.statusText}.
+    </div>
+
+
+    <div if.bind="criteriaLoad">
+      Loading criteria… <span class="fa fa-circle-o-notch fa-spin"></span>
+    </div>
+
+    <div if.bind="criteria">
+      <div class="btn-group">
+        <button class="btn btn-success" click.delegate="onAddCriterion()">
+          <span class="fa fa-plus"></span> Add Criteria
+        </button>
+
+        <button class="btn btn-danger" click.delegate="onClearCriteria()">
+          <span class="fa fa-trash"></span> Clear Criteria
+        </button>
+
+        <button class="btn btn-primary" click.delegate="searchWines()">
+          <span class="fa fa-search"></span> Search
+        </button>
+      </div>
+
+      <criterion repeat.for="arg of searchArguments"
+                 criteria.bind="criteria" argument.bind="arg"
+                 remove.delegate="onRemoveCriterion($event)"></criterion>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="container">
+
+    <div if.bind="winesLoad">
+      Loading wines… <span class="fa fa-circle-o-notch fa-spin"></span>
+    </div>
+
+    <div if.bind="wines && wines.length" class="list-group">
+      <wine repeat.for="wine of wines" id.bind="wine"></wine>
+    </div>
+
+    <div if.bind="wines && !wines.length">
+      No wines match the selected criteria.
+    </div>
+
+  </div>
+</template>

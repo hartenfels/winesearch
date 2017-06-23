@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+repositories {
+  mavenCentral()
+  flatDir {
+    dirs '.'
+  }
+}
+
+dependencies {
+  compile 'com.sparkjava:spark-core:2.6.0'
+  compile 'org.slf4j:slf4j-simple:1.7.13'
+  compile name: 'jastics'
+}
+
+sourceCompatibility = '1.8'
+mainClassName       = 'semantics.example.WineSearch'
+
+
+compileJava {
+  options.fork = true
+  options.forkOptions.executable = './javac.sh'
+}
+
+sourceSets {
+  main {
+    java {
+      exclude('**/SparqlModel.java')
+    }
+  }
+}
+
+
+jar {
+  archiveName    = 'WineSearch.jar'
+  destinationDir = projectDir
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}

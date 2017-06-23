@@ -1,0 +1,29 @@
+<template>
+  <div class="row with-headroom">
+
+    <div class="col-xs-4">
+      <select class="form-control" value.bind="selectedCategory"
+              change.delegate="onSelectCategory()">
+        <option repeat.for="c of categories" value.bind="c.value">
+          ${c.title}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-xs-4">
+      <select class="form-control" value.bind="selectedOption"
+              change.delegate="updateArgument()">
+        <option repeat.for="o of options" value.bind="o">
+          ${o | humanize}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-xs-4">
+      <button class="btn btn-danger" click.delegate="onRemove()">
+        <span class="fa fa-times"></span> Remove
+      </button>
+    </div>
+
+  </div>
+</template>
