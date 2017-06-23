@@ -5,7 +5,7 @@ JAVA   ?= java
 run: WineSearch.jar
 	$(JAVA) -jar $< || echo
 
-WineSearch.jar: src/main/java/semantics/example/*.java jastics.jar
+WineSearch.jar: src/main/java/semantics/example/*.java jastics.jar build.gradle
 	$(GRADLE) jar
 	touch $@
 

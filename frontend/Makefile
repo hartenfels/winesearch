@@ -28,5 +28,7 @@ aurelia_project/aurelia.json: aurelia_project/aurelia.tpl.json index.tpl.html $(
 clean:
 	rm -rf scripts*
 
+realclean: clean
 
-.PHONY: dev project clean
+
+.PHONY: dev project clean realclean
