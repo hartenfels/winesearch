@@ -65,7 +65,7 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
 
-  public List<Individual> wines(List<WineSearch.Arg> searchArgs) {
+  public List<⊤> wines(List<WineSearch.Arg> searchArgs) {
     Conceptual dl = concept(":Wine");
 
     for (WineSearch.Arg arg : searchArgs) {
@@ -93,9 +93,9 @@ public class LambdaModel implements Model knows "wine.rdf" {
     «:Wine» wine;
 
     try {
-      wine = («:Wine») head(query-for(⎨prefix(name)⎬));
+      wine = head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
     }
-    catch (ClassCastException | NoSuchElementException e) {
+    catch (NoSuchElementException e) {
       return null;
     }
 
