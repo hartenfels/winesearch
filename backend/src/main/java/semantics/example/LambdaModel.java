@@ -7,7 +7,6 @@ import com.google.gson.JsonSerializer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import semantics.model.Conceptual;
 import semantics.model.Individual;
@@ -90,12 +89,9 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
   public Map<String, String> wine(String name) {
-    «:Wine» wine;
+    «:Wine» wine = head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
 
-    try {
-      wine = head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
-    }
-    catch (NoSuchElementException e) {
+    if (wine == null) {
       return null;
     }
 
