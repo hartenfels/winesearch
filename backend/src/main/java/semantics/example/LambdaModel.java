@@ -97,12 +97,12 @@ public class LambdaModel implements Model knows "wine.rdf" {
 
     Map<String, String> wineInfo = new HashMap<>();
 
-    wineInfo.put("body",   coalesce(wine.«:hasBody»,   "Incorporeal"));
-    wineInfo.put("color",  coalesce(wine.«:hasColor»,  "Colorless"  ));
-    wineInfo.put("flavor", coalesce(wine.«:hasFlavor», "Flavorless" ));
-    wineInfo.put("maker",  coalesce(wine.«:hasMaker»,  "Nobody"     ));
-    wineInfo.put("region", coalesce(wine.«:locatedIn», "Æther"      ));
-    wineInfo.put("sugar",  coalesce(wine.«:hasSugar»,  "Tasteless"  ));
+    wineInfo.put("body",   coalesce(wine.(":hasBody"),   "Incorporeal"));
+    wineInfo.put("color",  coalesce(wine.(":hasColor"),  "Colorless"  ));
+    wineInfo.put("flavor", coalesce(wine.(":hasFlavor"), "Flavorless" ));
+    wineInfo.put("maker",  coalesce(wine.(":hasMaker"),  "Nobody"     ));
+    wineInfo.put("region", coalesce(wine.(":locatedIn"), "Æther"      ));
+    wineInfo.put("sugar",  coalesce(wine.(":hasSugar"),  "Tasteless"  ));
 
     return wineInfo;
   }
