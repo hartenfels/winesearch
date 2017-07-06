@@ -174,24 +174,24 @@ public class SparqlModel implements Model {
   }
 
 
-  private Value project(String subject, String predicate, String dft) {
+  private Value project(String subject, String predicate) {
     SelectQuery sq = reason("SELECT ?o WHERE { ?s ?p ?o }").limit(1);
     sq.parameter("s", Values.iri(VIN, subject));
     sq.parameter("p", Values.iri(VIN, predicate));
 
     Map<String, Value> first = execute(sq).findAny().orElse(null);
-    return first == null ? Values.iri(VIN, dft) : first.get("o");
+    return first == null ? null : first.get("o");
   }
 
   public Map<String, Value> wine(String name) {
     Map<String, Value> wineInfo = new HashMap<>();
 
-    wineInfo.put("body",   project(name, "hasBody",   "Incorporeal"));
-    wineInfo.put("color",  project(name, "hasColor",  "Colorless"  ));
-    wineInfo.put("flavor", project(name, "hasFlavor", "Flavorless" ));
-    wineInfo.put("maker",  project(name, "hasMaker",  "Nobody"     ));
-    wineInfo.put("region", project(name, "locatedIn", "Æther"      ));
-    wineInfo.put("sugar",  project(name, "hasSugar",  "Tasteless"  ));
+    wineInfo.put("body",   project(name, "hasBody"  ));
+    wineInfo.put("color",  project(name, "hasColor" ));
+    wineInfo.put("flavor", project(name, "hasFlavor"));
+    wineInfo.put("maker",  project(name, "hasMaker" ));
+    wineInfo.put("region", project(name, "locatedIn"));
+    wineInfo.put("sugar",  project(name, "hasSugar" ));
 
     return wineInfo;
   }
