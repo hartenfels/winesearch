@@ -7,7 +7,6 @@ import com.google.gson.JsonSerializer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import semantics.model.Conceptual;
 import semantics.model.Individual;
@@ -65,7 +64,7 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
 
-  public List<Individual> wines(List<WineSearch.Arg> searchArgs) {
+  public List<⊤> wines(List<WineSearch.Arg> searchArgs) {
     Conceptual dl = concept(":Wine");
 
     for (WineSearch.Arg arg : searchArgs) {
@@ -85,28 +84,21 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
 
-  private static String coalesce(Set<? extends Individual> set, String dft) {
-    return set.isEmpty() ? dft : head(set).getName();
-  }
+  public Map<String, ∃⊤·«:Wine»> wine(String name) {
+    «:Wine» wine = head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
 
-  public Map<String, String> wine(String name) {
-    «:Wine» wine;
-
-    try {
-      wine = («:Wine») head(query-for(⎨prefix(name)⎬));
-    }
-    catch (ClassCastException | NoSuchElementException e) {
+    if (wine == null) {
       return null;
     }
 
-    Map<String, String> wineInfo = new HashMap<>();
+    Map<String, ∃⊤·«:Wine»> wineInfo = new HashMap<>();
 
-    wineInfo.put("body",   coalesce(wine.«:hasBody»,   "Incorporeal"));
-    wineInfo.put("color",  coalesce(wine.«:hasColor»,  "Colorless"  ));
-    wineInfo.put("flavor", coalesce(wine.«:hasFlavor», "Flavorless" ));
-    wineInfo.put("maker",  coalesce(wine.«:hasMaker»,  "Nobody"     ));
-    wineInfo.put("region", coalesce(wine.«:locatedIn», "Æther"      ));
-    wineInfo.put("sugar",  coalesce(wine.«:hasSugar»,  "Tasteless"  ));
+    wineInfo.put("body",   head(wine.(":hasBody"  )));
+    wineInfo.put("color",  head(wine.(":hasColor" )));
+    wineInfo.put("flavor", head(wine.(":hasFlavor")));
+    wineInfo.put("maker",  head(wine.(":hasMaker" )));
+    wineInfo.put("region", head(wine.(":locatedIn")));
+    wineInfo.put("sugar",  head(wine.(":hasSugar" )));
 
     return wineInfo;
   }

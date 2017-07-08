@@ -6,12 +6,12 @@
   </button>
 
   <div class="wine-details list-group-item au-animate" if.bind="expandDetails">
-    ${details.sugar | humanize | hyphenize}
-    ${details.color | humanize} Wine,
-    produced by ${details.maker | humanize}
-    from the ${details.region | humanize}.
-    ${details.body | humanize} body,
-    ${details.flavor | humanize} flavor.
+    ${details.sugar || "Tasteless" | humanize | hyphenize}
+    ${details.color || "Colorless" | humanize} Wine,
+    produced by ${details.maker || "Nobody" | humanize}
+    from the ${details.region || "Æther" | humanize}.
+    ${details.body || "Incorporeal" | humanize} body,
+    ${details.flavor || "Flavorless" | humanize} flavor.
   </div>
 
   <div class="list-group-item list-group-item-danger au-animate"
