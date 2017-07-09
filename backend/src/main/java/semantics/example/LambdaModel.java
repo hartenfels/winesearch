@@ -68,16 +68,13 @@ public class LambdaModel implements Model knows "wine.rdf" {
     Conceptual dl = ⊤;
 
     for (WineSearch.Arg arg : searchArgs) {
-      String     role  = prefix(arg.role);
-      String     first = prefix(arg.values[0]);
-      Conceptual union = ∃role·⎨first⎬;
+      Conceptual union = ⎨prefix(arg.values[0])⎬;
 
       for (int i = 1; i < arg.values.length; ++i) {
-        String part = prefix(arg.values[i]);
-        union ⊔= ∃role·⎨part⎬;
+        union ⊔= ⎨prefix(arg.values[i])⎬;
       }
 
-      dl ⊓= union;
+      dl ⊓= ∃prefix(arg.role)·union;
     }
 
     return sorted(query-for(":Wine" ⊓ dl));
