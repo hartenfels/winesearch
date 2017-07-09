@@ -64,8 +64,8 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
 
-  public List<⊤> wines(List<WineSearch.Arg> searchArgs) {
-    Conceptual dl = concept(":Wine");
+  public List<«:Wine»> wines(List<WineSearch.Arg> searchArgs) {
+    Conceptual dl = ⊤;
 
     for (WineSearch.Arg arg : searchArgs) {
       String     role  = prefix(arg.role);
@@ -80,7 +80,7 @@ public class LambdaModel implements Model knows "wine.rdf" {
       dl ⊓= union;
     }
 
-    return sorted(query-for(dl));
+    return sorted(query-for(":Wine" ⊓ dl));
   }
 
 
