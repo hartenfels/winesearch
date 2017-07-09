@@ -158,8 +158,6 @@ public class SparqlModel implements Model {
 
     lines.add("}");
 
-    System.out.println(String.join("\n", lines));
-
     SelectQuery sq = reason(String.join("\n", lines));
 
     for (int i = 0; i < params.size(); ++i) {
