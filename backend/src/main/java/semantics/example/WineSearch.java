@@ -32,18 +32,22 @@ public class WineSearch {
   };
 
 
-  private final Model model;
+  private final Model           model;
+  private final WikipediaSource wikipedia;
 
   public WineSearch() {
     port(3000);
     staticFiles.externalLocation("public");
 
-    model = new LambdaModel();
+    model     = new LambdaModel();
+    wikipedia = new WikipediaSource();
 
     ResponseTransformer rt = model.getResponseTransformer();
-    get("/criteria",    this::criteria, rt);
-    get("/wines",       this::wines,    rt);
-    get("/wines/:wine", this::wine,     rt);
+    get("/criteria",         this::criteria, rt);
+    get("/wines",            this::wines,    rt);
+    get("/wines/:wine",      this::wine,     rt);
+    get("/regions/:region",  this::region,   rt);
+    get("/wineries/:winery", this::winery,   rt);
 
     after((req, res) -> {
       res.type("application/json");
@@ -88,6 +92,29 @@ public class WineSearch {
       e.printStackTrace();
       throw e;
     }
+  }
+
+
+  private Object region(Request req, Response res) {
+    String name = req.params(":region");
+
+    if (model.region(name) == null) {
+      res.status(404);
+      return null;
+    }
+
+    return wikipedia.getRegionInfo(name);
+  }
+
+  private Object winery(Request req, Response res) {
+    String name = req.params(":winery");
+
+    if (model.winery(name) == null) {
+      res.status(404);
+      return null;
+    }
+
+    return wikipedia.getWineryInfo(name);
   }
 
 

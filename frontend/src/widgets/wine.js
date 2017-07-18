@@ -3,12 +3,13 @@ import {Api}                             from '../api';
 
 
 @containerless()
-@inject(Api)
+@inject(Api, Element)
 export class Wine {
   @bindable id;
 
-  constructor(api) {
-    this.api = api;
+  constructor(api, element) {
+    this.api     = api;
+    this.element = element;
   }
 
 
@@ -38,5 +39,24 @@ export class Wine {
       .then(() => {
         this.loading = false;
       });
+  }
+
+
+  wantInfo(type, name) {
+    let evt = new CustomEvent('wantinfo', {
+      bubbles : true,
+      detail  : {type : type, name : name},
+    });
+    this.element.dispatchEvent(evt);
+  }
+
+  onRegion() {
+    this.wantInfo('regions', this.details.region);
+    return false;
+  }
+
+  onMaker() {
+    this.wantInfo('wineries', this.details.maker);
+    return false;
   }
 }

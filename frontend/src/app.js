@@ -1,5 +1,6 @@
 import {Api}    from './api';
 import {inject} from 'aurelia-framework';
+import $        from 'jquery';
 
 
 @inject(Api)
@@ -93,5 +94,11 @@ export class App {
       .then(() => {
         this.winesLoad = false;
       });
+  }
+
+
+  onWantInfo(evt) {
+    this.modalInfo = evt.detail;
+    $('.modal').modal('show');
   }
 }

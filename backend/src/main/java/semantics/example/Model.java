@@ -13,4 +13,7 @@ public interface Model {
   public List<?> wines(List<WineSearch.Arg> searchArgs);
 
   public Map<String, ?> wine(String name);
+
+  public Object region(String name);
+  public Object winery(String name);
 }

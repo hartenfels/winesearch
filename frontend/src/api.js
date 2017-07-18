@@ -51,4 +51,9 @@ export class Api {
   getDetails(wineId) {
     return this.get(['wines', wineId]);
   }
+
+
+  getRegion(regionId) {
+    return this.get(['regions', regionId]);
+  }
 }
