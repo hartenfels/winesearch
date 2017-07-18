@@ -1,2 +1,2 @@
 #!/bin/sh
-exec java -jar jastics.jar "$@"
+exec java -jar semantics.jar "$@"

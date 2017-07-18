@@ -5,7 +5,7 @@ JAVA   ?= java
 run: WineSearch.jar
 	$(JAVA) -jar $< || echo
 
-WineSearch.jar: src/main/java/semantics/example/*.java jastics.jar build.gradle
+WineSearch.jar: src/main/java/semantics/example/*.java semantics.jar build.gradle
 	$(GRADLE) jar
 	touch $@
 
@@ -16,9 +16,9 @@ public: ../frontend/prod
 	cp -r ../frontend/index.html ../frontend/scripts* $@
 
 
-jastics.jar:
+semantics.jar:
 	@echo
-	@echo -e "\e[31m*** Error: jastics.jar not found! ***\e[0m"
+	@echo -e "\e[31m*** Error: semantics.jar not found! ***\e[0m"
 	@echo
 	@echo 'You need to build it and copy or link it into this directory:'
 	@echo "$$(pwd)"
