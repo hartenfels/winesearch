@@ -172,13 +172,17 @@ public class SparqlModel implements Model {
   }
 
 
+  private Value single(SelectQuery sq, String key) {
+    Map<String, Value> first = execute(sq).findAny().orElse(null);
+    return first == null ? null : first.get(key);
+  }
+
+
   private Value project(String subject, String predicate) {
     SelectQuery sq = reason("SELECT ?o WHERE { ?s ?p ?o }").limit(1);
     sq.parameter("s", Values.iri(VIN, subject));
     sq.parameter("p", Values.iri(VIN, predicate));
-
-    Map<String, Value> first = execute(sq).findAny().orElse(null);
-    return first == null ? null : first.get("o");
+    return single(sq, "o");
   }
 
   public Map<String, Value> wine(String name) {
@@ -192,5 +196,21 @@ public class SparqlModel implements Model {
     wineInfo.put("sugar",  project(name, "hasSugar" ));
 
     return wineInfo;
+  }
+
+
+  private Value getSingleOfType(String subject, String object) {
+    SelectQuery sq = reason("SELECT ?s WHERE { ?s rdf:type ?o }");
+    sq.parameter("s", Values.iri(VIN, subject));
+    sq.parameter("o", Values.iri(VIN, object));
+    return single(sq, "o");
+  }
+
+  public Value region(String name) {
+    return getSingleOfType(name, "Region");
+  }
+
+  public Value winery(String name) {
+    return getSingleOfType(name, "Winery");
   }
 }
