@@ -193,4 +193,20 @@ public class SparqlModel implements Model {
 
     return wineInfo;
   }
+
+
+  private Value getSingleOfType(String subject, String object) {
+    SelectQuery sq = reason("SELECT ?s WHERE { ?s rdf:type ?o }");
+    sq.parameter("s", Values.iri(VIN, subject));
+    sq.parameter("o", Values.iri(VIN, object));
+    return single(sq, "s");
+  }
+
+  public Value region(String name) {
+    return getSingleOfType(name, "Region");
+  }
+
+  public Value winery(String name) {
+    return getSingleOfType(name, "Winery");
+  }
 }
