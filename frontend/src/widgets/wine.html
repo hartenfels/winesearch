@@ -1,5 +1,4 @@
 <template>
-
   <button class="list-group-item" click.trigger="onClick(wine)">
     ${id | humanize}
     <span show.bind="loading" class="fa fa-circle-o-notch fa-spin"></span>
@@ -8,8 +7,19 @@
   <div class="wine-details list-group-item au-animate" if.bind="expandDetails">
     ${details.sugar || "Tasteless" | humanize | hyphenize}
     ${details.color || "Colorless" | humanize} Wine,
-    produced by ${details.maker || "Nobody" | humanize}
-    from the ${details.region || "Æther" | humanize}.
+
+    produced by
+    <template if.bind="details.maker">
+      <a href="#" click.delegate="onMaker()">${details.maker | humanize}</a>.
+    </template>
+    <template if.bind="!details.maker">Nobody.</template>
+
+    from the
+    <template if.bind="details.region">
+      <a href="#" click.delegate="onRegion()">${details.region | humanize}</a>.
+    </template>
+    <template if.bind="!details.region">Æther.</template>
+
     ${details.body || "Incorporeal" | humanize} body,
     ${details.flavor || "Flavorless" | humanize} flavor.
   </div>
@@ -18,5 +28,4 @@
        if.bind="expandError">
     ${error.statusText}
   </div>
-
 </template>

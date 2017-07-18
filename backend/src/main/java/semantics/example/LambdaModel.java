@@ -99,4 +99,13 @@ public class LambdaModel implements Model knows "wine.rdf" {
 
     return wineInfo;
   }
+
+
+  public «:Region» region(String name) {
+    return head(query-for(":Region" ⊓ ⎨prefix(name)⎬));
+  }
+
+  public «:Winery» winery(String name) {
+    return head(query-for(":Winery" ⊓ ⎨prefix(name)⎬));
+  }
 }

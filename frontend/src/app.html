@@ -2,6 +2,7 @@
   <require from="./app.css"></require>
   <require from="./widgets/wine"></require>
   <require from="./widgets/criterion"></require>
+  <require from="./widgets/modal"></require>
 
   <div class="jumbotron">
     <div class="container">
@@ -74,7 +75,8 @@
     </div>
 
     <div if.bind="wines && wines.length" class="list-group">
-      <wine repeat.for="wine of wines" id.bind="wine"></wine>
+      <wine repeat.for="wine of wines" id.bind="wine"
+            wantinfo.delegate="onWantInfo($event)"></wine>
     </div>
 
     <div if.bind="wines && !wines.length">
@@ -82,4 +84,6 @@
     </div>
 
   </div>
+
+  <modal info.bind="modalInfo"></modal>
 </template>

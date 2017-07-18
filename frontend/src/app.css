@@ -24,3 +24,12 @@ button.list-group-item:focus:hover {
 .with-headroom {
   margin-top : 1em;
 }
+
+.modal-title {
+  text-transform : capitalize;
+}
+
+.verbatim {
+  text-align  : justify;
+  white-space : pre-wrap;
+}
