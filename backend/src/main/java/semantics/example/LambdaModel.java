@@ -90,12 +90,12 @@ public class LambdaModel implements Model knows "wine.rdf" {
 
     Map<String, ∃⊤·«:Wine»> wineInfo = new HashMap<>();
 
-    wineInfo.put("body",   head(wine.(":hasBody"  )));
-    wineInfo.put("color",  head(wine.(":hasColor" )));
-    wineInfo.put("flavor", head(wine.(":hasFlavor")));
-    wineInfo.put("maker",  head(wine.(":hasMaker" )));
-    wineInfo.put("region", head(wine.(":locatedIn")));
-    wineInfo.put("sugar",  head(wine.(":hasSugar" )));
+    wineInfo.put("body",   head(sorted(wine.(":hasBody"  ))));
+    wineInfo.put("color",  head(sorted(wine.(":hasColor" ))));
+    wineInfo.put("flavor", head(sorted(wine.(":hasFlavor"))));
+    wineInfo.put("maker",  head(sorted(wine.(":hasMaker" ))));
+    wineInfo.put("region", head(sorted(wine.(":locatedIn"))));
+    wineInfo.put("sugar",  head(sorted(wine.(":hasSugar" ))));
 
     return wineInfo;
   }
