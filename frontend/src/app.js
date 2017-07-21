@@ -99,6 +99,6 @@ export class App {
 
   onWantInfo(evt) {
     this.modalInfo = evt.detail;
-    $('.modal').modal('show');
+    $('#info-modal').modal('show');
   }
 }
