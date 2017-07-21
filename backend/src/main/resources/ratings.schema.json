@@ -1,0 +1,18 @@
+{
+  "type"       : "object",
+  "required"   : ["author", "rating"],
+  "properties" : {
+    "author" : {
+      "type"    : "string",
+      "pattern" : "\\S"
+    },
+    "rating" : {
+      "type"    : "integer",
+      "minimum" : 1,
+      "maximum" : 5
+    },
+    "review" : {
+      "type" : "string"
+    }
+  }
+}

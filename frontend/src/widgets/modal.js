@@ -27,7 +27,6 @@ export class Modal {
       })
       .then(() => {
         this.loading = false;
-        $('.modal-body').slideDown();
       });
   }
 }

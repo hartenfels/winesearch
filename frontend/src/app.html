@@ -3,6 +3,49 @@
   <require from="./widgets/wine"></require>
   <require from="./widgets/criterion"></require>
   <require from="./widgets/modal"></require>
+  <require from="./widgets/ratings"></require>
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">wineseλrch</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li if.bind="!user">
+            <form id="login" submit.delegate="onLogin()">
+              <div class="input-group">
+                <input class="form-control" placeholder="Name"
+                       type="text" value.bind="loginInput">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-success"
+                          disabled.bind="loginInputBlank">
+                    <span class="fa fa-sign-in"></span> Log In
+                  </button>
+                </span>
+              </div>
+            </form>
+          </li>
+          <li if.bind="user" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              ${user} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#" click.delegate="onLogout()">Log Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="jumbotron">
     <div class="container">
@@ -76,7 +119,8 @@
 
     <div if.bind="wines && wines.length" class="list-group">
       <wine repeat.for="wine of wines" id.bind="wine"
-            wantinfo.delegate="onWantInfo($event)"></wine>
+            wantinfo.delegate="onWantInfo($event)"
+            wantratings.delegate="onWantRatings($event)"></wine>
     </div>
 
     <div if.bind="wines && !wines.length">
@@ -86,4 +130,5 @@
   </div>
 
   <modal info.bind="modalInfo"></modal>
+  <ratings info.bind="ratingsInfo" user.bind="user"></ratings>
 </template>

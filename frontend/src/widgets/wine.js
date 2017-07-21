@@ -1,15 +1,27 @@
-import {bindable, containerless, inject} from 'aurelia-framework';
-import {Api}                             from '../api';
+import {bindable, containerless, inject, observable} from 'aurelia-framework';
+import {Api}                                         from '../api';
 
 
 @containerless()
 @inject(Api, Element)
 export class Wine {
-  @bindable id;
+  @bindable   id;
+  @observable details;
 
   constructor(api, element) {
     this.api     = api;
     this.element = element;
+  }
+
+
+  detailsChanged(res, _) {
+    let rs  = res.ratings;
+    let len = rs.length;
+
+    res.averageRating   = rs.map(r => r.rating).reduce((a, b) => a + b, 0) / len;
+    res.numberOfRatings = len;
+
+    return res;
   }
 
 
@@ -57,6 +69,16 @@ export class Wine {
 
   onMaker() {
     this.wantInfo('wineries', this.details.maker);
+    return false;
+  }
+
+
+  onRatings() {
+    let evt = new CustomEvent('wantratings', {
+      bubbles : true,
+      detail  : {wine : this},
+    });
+    this.element.dispatchEvent(evt);
     return false;
   }
 }
