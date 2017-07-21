@@ -1,5 +1,6 @@
 import {HttpClient} from 'aurelia-http-client';
 import {inject}     from 'aurelia-framework';
+import environment  from './environment';
 import $            from 'jquery';
 
 
@@ -8,8 +9,11 @@ export class Api {
 
   constructor(httpClient) {
     (this.httpClient = httpClient).configure(config => {
+      let host = environment.testing
+               ? 'http://localhost:3000/'
+               : location.href;
       config
-        .withBaseUrl('http://localhost:3000/')
+        .withBaseUrl(host)
         .withInterceptor({
           response     (msg) { return msg.content; },
           requestError (err) { throw this.explain(err); },
