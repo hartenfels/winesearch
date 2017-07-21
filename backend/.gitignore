@@ -1,3 +1,4 @@
+*.db
 *.jar
 .gradle
 build

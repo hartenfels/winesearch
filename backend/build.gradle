@@ -13,6 +13,8 @@ dependencies {
   compile 'com.sparkjava:spark-core:2.6.0'
   compile 'org.slf4j:slf4j-simple:1.7.13'
   compile 'com.mashape.unirest:unirest-java:1.4.9'
+  compile 'org.xerial:sqlite-jdbc:3.18.0'
+  compile 'com.github.java-json-tools:json-schema-validator:2.2.8'
   compile name: 'semantics'
 }
 

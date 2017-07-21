@@ -5,23 +5,47 @@
   </button>
 
   <div class="wine-details list-group-item au-animate" if.bind="expandDetails">
-    ${details.sugar || "Tasteless" | humanize | hyphenize}
-    ${details.color || "Colorless" | humanize} Wine,
+    <p>
+      ${details.sugar || "Tasteless" | humanize | hyphenize}
+      ${details.color || "Colorless" | humanize} Wine,
 
-    produced by
-    <template if.bind="details.maker">
-      <a href="#" click.delegate="onMaker()">${details.maker | humanize}</a>.
-    </template>
-    <template if.bind="!details.maker">Nobody.</template>
+      produced by
+      <template if.bind="details.maker">
+        <a href="#" click.delegate="onMaker()"
+           title="More info about this winery.">${details.maker | humanize}</a>.
+      </template>
+      <template if.bind="!details.maker">Nobody.</template>
 
-    from the
-    <template if.bind="details.region">
-      <a href="#" click.delegate="onRegion()">${details.region | humanize}</a>.
-    </template>
-    <template if.bind="!details.region">Æther.</template>
+      from the
+      <template if.bind="details.region">
+        <a href="#" click.delegate="onRegion()"
+           title="More info about this region.">${details.region | humanize}</a>.
+      </template>
+      <template if.bind="!details.region">Æther.</template>
 
-    ${details.body || "Incorporeal" | humanize} body,
-    ${details.flavor || "Flavorless" | humanize} flavor.
+      ${details.body || "Incorporeal" | humanize} body,
+      ${details.flavor || "Flavorless" | humanize} flavor.
+    </p>
+    <div>
+      <button class="btn btn-xs btn-primary" title="Ratings and Reviews"
+              click.delegate="onRatings()">
+        <span class.bind="details.averageRating | stars:1"></span>
+        <span class.bind="details.averageRating | stars:2"></span>
+        <span class.bind="details.averageRating | stars:3"></span>
+        <span class.bind="details.averageRating | stars:4"></span>
+        <span class.bind="details.averageRating | stars:5"></span>
+      </button>
+      &nbsp;
+      <template if.bind="details.numberOfRatings < 1">
+        (no ratings yet)
+      </template>
+      <template if.bind="details.numberOfRatings == 1">
+        (based on 1 rating)
+      </template>
+      <template if.bind="details.numberOfRatings > 1">
+        (average out of ${details.numberOfRatings} ratings)
+      </template>
+    </div>
   </div>
 
   <div class="list-group-item list-group-item-danger au-animate"

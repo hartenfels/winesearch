@@ -97,8 +97,30 @@ export class App {
   }
 
 
+  get loginInputBlank() {
+    return !this.loginInput || !/\S/.test(this.loginInput);
+  }
+
+  onLogin() {
+    if (!this.loginInputBlank) {
+      this.user       = this.loginInput.trim();
+      this.loginInput = "";
+    }
+  }
+
+  onLogout() {
+    this.user = null;
+    return false;
+  }
+
+
   onWantInfo(evt) {
     this.modalInfo = evt.detail;
     $('#info-modal').modal('show');
+  }
+
+  onWantRatings(evt) {
+    this.ratingsInfo = evt.detail;
+    $('#ratings-modal').modal('show');
   }
 }

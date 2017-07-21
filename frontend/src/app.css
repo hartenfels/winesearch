@@ -1,5 +1,14 @@
 body {
-  overflow-y : scroll;
+  overflow-y  : scroll;
+}
+
+.navbar {
+  margin-bottom : 0px;
+}
+
+#login {
+  min-width   : 300px;
+  padding-top : 8.5px;
 }
 
 .btn {
@@ -25,11 +34,24 @@ button.list-group-item:focus:hover {
   margin-top : 1em;
 }
 
-.modal-title {
+#info-modal .modal-title {
   text-transform : capitalize;
 }
 
 .verbatim {
   text-align  : justify;
   white-space : pre-wrap;
+}
+
+.empty-message {
+  font-style : italic;
+}
+
+#ratings-modal select {
+  font-size : 24px;
+  height    : 56px;
+}
+
+#ratings-modal p {
+  margin-top : 23px;
 }

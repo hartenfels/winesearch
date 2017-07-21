@@ -14,6 +14,8 @@ public interface Model {
 
   public Map<String, ?> wine(String name);
 
+  public void rateWine(String name, String author, int rating, String review);
+
   public Object region(String name);
   public Object winery(String name);
 }

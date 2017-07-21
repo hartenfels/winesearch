@@ -18,7 +18,8 @@ import static semantics.Util.sorted;
 
 
 public class LambdaModel implements Model knows "wine.rdf" {
-  private Gson gson;
+  private Gson     gson;
+  private Database db;
 
   public LambdaModel() {
     JsonSerializer<Individual> serializer = (src, type, context) -> {
@@ -28,6 +29,8 @@ public class LambdaModel implements Model knows "wine.rdf" {
     gson = new GsonBuilder()
         .registerTypeHierarchyAdapter(Individual.class, serializer)
         .create();
+
+    db = new Database();
   }
 
 
@@ -81,14 +84,18 @@ public class LambdaModel implements Model knows "wine.rdf" {
   }
 
 
-  public Map<String, ∃⊤·«:Wine»> wine(String name) {
-    «:Wine» wine = head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
+  private «:Wine» findWine(String name) {
+    return head(query-for(":Wine" ⊓ ⎨prefix(name)⎬));
+  }
+
+  public Map<String, Object> wine(String name) {
+    «:Wine» wine = findWine(name);
 
     if (wine == null) {
       return null;
     }
 
-    Map<String, ∃⊤·«:Wine»> wineInfo = new HashMap<>();
+    Map<String, Object> wineInfo = new HashMap<>();
 
     wineInfo.put("body",   head(sorted(wine.(":hasBody"  ))));
     wineInfo.put("color",  head(sorted(wine.(":hasColor" ))));
@@ -97,7 +104,13 @@ public class LambdaModel implements Model knows "wine.rdf" {
     wineInfo.put("region", head(sorted(wine.(":locatedIn"))));
     wineInfo.put("sugar",  head(sorted(wine.(":hasSugar" ))));
 
+    wineInfo.put("ratings", db.getRatingsFor(wine));
+
     return wineInfo;
+  }
+
+  public void rateWine(String name, String author, int rating, String review) {
+    db.rate(findWine(name), author, rating, review);
   }
 
 

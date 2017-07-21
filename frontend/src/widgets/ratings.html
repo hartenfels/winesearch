@@ -1,0 +1,71 @@
+<template>
+  <div id="ratings-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h2 if.bind="info" class="modal-title">
+            Ratings for ${info.wine.id | humanize}
+          </h2>
+        </div>
+        <div class="modal-body">
+          <ul class="media-list">
+            <li if.bind="own" class="media">
+              <form class="media-body well" submit.delegate="onSave()">
+                <div class="form-group">
+                  <select class="form-control" value.bind="input.rating"
+                          disabled.bind="saving">
+                    <option model.bind="0">Select Rating</option>
+                    <option model.bind="1">★☆☆☆☆ 1/5 Awful</option>
+                    <option model.bind="2">★★☆☆☆ 2/5 Bad</option>
+                    <option model.bind="3">★★★☆☆ 3/5 Average</option>
+                    <option model.bind="4">★★★★☆ 4/5 Good</option>
+                    <option model.bind="5">★★★★★ 5/5 Excellent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" rows="5"
+                            placeholder="Your Review"
+                            value.bind="input.review"
+                            disabled.bind="saving"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success"
+                        disabled.bind="ratingsDisabled" show.bind="!saving">
+                  <span class="fa fa-check"></span> Save
+                </button>
+                <button class="btn btn-success" show.bind="saving" disabled>
+                  <span class="fa fa-circle-o-notch fa-spin"></span> Saving…
+                </button>
+              </form>
+            </li>
+            <li repeat.for="r of ratings" class="media">
+              <div class="media-body well">
+                <h3 class="media-heading">
+                  <span class.bind="r.rating | stars:1"></span>
+                  <span class.bind="r.rating | stars:2"></span>
+                  <span class.bind="r.rating | stars:3"></span>
+                  <span class.bind="r.rating | stars:4"></span>
+                  <span class.bind="r.rating | stars:5"></span>
+                  &nbsp; ${r.author}
+                </h3>
+                <p if.bind="r.review && r.review.length"
+                   class="verbatim">${r.review}</p>
+              </div>
+            </li>
+            <li if.bind="!ratings.length" class="media empty-message">
+              <div class="media-body well">
+                There's no ratings yet.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="fa fa-times"></span>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
