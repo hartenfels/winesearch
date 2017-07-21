@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openrdf.model.Value;
 
 
-public class Database knows "wine.rdf" {
+public class Database {
   private final Connection conn;
 
   public Database() {
@@ -32,12 +33,12 @@ public class Database knows "wine.rdf" {
   }
 
 
-  public void rate(«:Wine» wine, String author, int rating, String review) {
+  public void rate(Value wine, String author, int rating, String review) {
     try {
       PreparedStatement stmt = conn.prepareStatement(
           "INSERT OR REPLACE INTO ratings VALUES (?, ?, ?, ?)");
 
-      stmt.setString(1, wine.getIri());
+      stmt.setString(1, wine.stringValue());
       stmt.setString(2, author);
       stmt.setInt   (3, rating);
       stmt.setString(4, review);
@@ -50,11 +51,11 @@ public class Database knows "wine.rdf" {
   }
 
 
-  public List<Map<String, Object>> getRatingsFor(«:Wine» wine) {
+  public List<Map<String, Object>> getRatingsFor(Value wine) {
     try {
       PreparedStatement stmt = conn.prepareStatement(
           "SELECT author, rating, review FROM ratings WHERE wine = ?");
-      stmt.setString(1, wine.getIri());
+      stmt.setString(1, wine.stringValue());
 
       List<Map<String, Object>> ratings = new ArrayList<>();
 

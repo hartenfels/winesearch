@@ -35,6 +35,7 @@ public class SparqlModel implements Model {
 
   private Connection conn;
   private Gson       gson;
+  private Database   db;
 
   public SparqlModel() {
     conn = ConnectionConfiguration
@@ -51,6 +52,8 @@ public class SparqlModel implements Model {
     gson = new GsonBuilder()
         .registerTypeHierarchyAdapter(IRI.class, serializer)
         .create();
+
+    db = new Database();
   }
 
 
@@ -185,8 +188,8 @@ public class SparqlModel implements Model {
     return single(sq, "o");
   }
 
-  public Map<String, Value> wine(String name) {
-    Map<String, Value> wineInfo = new HashMap<>();
+  public Map<String, Object> wine(String name) {
+    Map<String, Object> wineInfo = new HashMap<>();
 
     wineInfo.put("body",   project(name, "hasBody"  ));
     wineInfo.put("color",  project(name, "hasColor" ));
@@ -195,7 +198,13 @@ public class SparqlModel implements Model {
     wineInfo.put("region", project(name, "locatedIn"));
     wineInfo.put("sugar",  project(name, "hasSugar" ));
 
+    wineInfo.put("ratings", db.getRatingsFor(Values.iri(VIN, name)));
+
     return wineInfo;
+  }
+
+  public void rateWine(String name, String author, int rating, String review) {
+    db.rate(Values.iri(VIN, name), author, rating, review);
   }
 
 
