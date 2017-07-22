@@ -6,15 +6,15 @@ SRC  = $(shell find src -type f)
 NOW := $(shell date +%s)
 
 
-dev: aurelia_project/aurelia.json yarn.lock
+dev: aurelia_project/aurelia.json yarn.lock node_modules
 	$(AU) run --watch
 	rm -f prod
 
-prod: aurelia_project/aurelia.json yarn.lock
+prod: aurelia_project/aurelia.json yarn.lock node_modules
 	$(AU) build --env prod
 	touch prod
 
-yarn.lock: package.json
+yarn.lock node_modules: package.json
 	$(YARN) install
 	touch $@
 
