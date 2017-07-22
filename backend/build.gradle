@@ -22,15 +22,6 @@ sourceCompatibility = '1.8'
 mainClassName       = 'semantics.example.WineSearch'
 
 
-sourceSets {
-  main {
-    java {
-      exclude('**/LambdaModel.java')
-    }
-  }
-}
-
-
 jar {
   archiveName    = 'WineSearch.jar'
   destinationDir = projectDir
