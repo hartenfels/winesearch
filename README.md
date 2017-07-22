@@ -8,10 +8,10 @@ wineseλrch — sample semantic data application for the [Software Languages Tea
 For building, you'll need `make`, [Gradle](https://gradle.org/) and
 [yarn](https://yarnpkg.com/en/).
 
-1. Have [Semserv](https://github.com/hartenfels/Semserv).
+1. Have [Semserv](https://github.com/hartenfels/Semserv) built and running.
 
 2. Build [Semantics4J](https://github.com/hartenfels/Semantics4J) and copy or
-   link the resulting `semantics.jar`.
+   symlink the resulting `semantics.jar` into the [backend](backend) directory.
 
 3. Run `make` and let the application build and start the server.
 
