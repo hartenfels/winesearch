@@ -88,7 +88,9 @@ quickly.
 
 # LICENSE
 
-[Apache License, Version 2](LICENSE)
+Copyright 2017 Carsten Hartenfels.
+
+Licensed under the [Apache License, Version 2](LICENSE).
 
 
 # SEE ALSO
