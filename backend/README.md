@@ -22,9 +22,8 @@ The application is structured as follows:
   * [Model.java](src/main/java/semantics/example/Model.java) defines the
     interface for the data model.
 
-  * [SemanticsModel.java](src/main/java/semantics/example/SemanticsModel.java)
-    implements said interface with
-    [Semantics4J](https://github.com/hartenfels/Semantics4J).
+  * [SparqlModel.java](src/main/java/semantics/example/SparqlModel.java)
+    implements said interface with [Stardog](http://www.stardog.com/).
 
   * [WikipediaSource.java](src/main/java/semantics/example/WikipediaSource.java)
     is the interface to the [Wikipedia](https://en.wikipedia.org/) REST API.
