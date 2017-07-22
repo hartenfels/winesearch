@@ -78,6 +78,13 @@ public class SparqlModel implements Model {
   private Stream<Map<String, Value>> execute(SelectQuery sq) {
     Stream.Builder<Map<String, Value>> bindings = Stream.builder();
 
+    // Stardog starts behaving really strange when queries take a long time. It
+    // simply ignores whatever limit was set on the query and falls back to the
+    // default of 20. That's of course insufficient for most wine queries,
+    // since they'll have more than 20 results. So this weird little loop is
+    // the workaround for that, it runs queries in 20 offset increments until
+    // less than 20 results are returned.
+
     int offset =  0;
     int found  = 20;
 
