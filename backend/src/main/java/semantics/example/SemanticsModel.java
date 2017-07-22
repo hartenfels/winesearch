@@ -17,11 +17,11 @@ import static semantics.Util.names;
 import static semantics.Util.sorted;
 
 
-public class LambdaModel implements Model knows "wine.rdf" {
+public class SemanticsModel implements Model knows "wine.rdf" {
   private Gson     gson;
   private Database db;
 
-  public LambdaModel() {
+  public SemanticsModel() {
     JsonSerializer<Individual> serializer = (src, type, context) -> {
       return new JsonPrimitive(src.getName());
     };

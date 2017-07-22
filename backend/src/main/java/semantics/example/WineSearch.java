@@ -49,7 +49,7 @@ public class WineSearch {
     port(3000);
     staticFiles.externalLocation("public");
 
-    model     = new LambdaModel();
+    model     = new SemanticsModel();
     wikipedia = new WikipediaSource();
 
     try {
