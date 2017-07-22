@@ -85,6 +85,17 @@ changes are made to the frontend. The backend server still needs to be
 recompiled manually when something is modified, but it builds much more
 quickly.
 
+## Stardog
+
+There is an alternate implementation in the git branch `stardog` using
+[Stardog](http://www.stardog.com/) version 4.2.4, a knowledge graph server with
+a SPARQL interface. This interface is *not recommended*, as it's extremely,
+prohibitively slow for this application.
+
+If you still want to try it, `git checkout stardog`, start the Stardog server
+with the `--snarl` option, load the Wine Ontology as a database called `wine`.
+Then and run `make` and visit <http://localhost:3000/> as usual.
+
 
 # LICENSE
 
