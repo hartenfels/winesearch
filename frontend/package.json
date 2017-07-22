@@ -1,10 +1,10 @@
 {
-  "name": "wines",
-  "description": "An Aurelia client application.",
+  "name": "winesearch",
+  "description": "Sample semantic data application for the Software Languages Team and Institute for Web Science of the University of Koblenz-Landau.",
   "version": "0.1.0",
   "repository": {
-    "type": "???",
-    "url": "???"
+    "type": "git",
+    "url": "github:hartenfels/winesearch"
   },
   "license": "Apache-2.0",
   "dependencies": {
