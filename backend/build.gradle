@@ -27,14 +27,6 @@ compileJava {
   options.forkOptions.executable = './javac.sh'
 }
 
-sourceSets {
-  main {
-    java {
-      exclude('**/SparqlModel.java')
-    }
-  }
-}
-
 
 jar {
   archiveName    = 'WineSearch.jar'
