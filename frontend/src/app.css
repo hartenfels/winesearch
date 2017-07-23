@@ -6,6 +6,15 @@ body {
   margin-bottom : 0px;
 }
 
+.navbar-brand {
+  font-size : 20px;
+}
+
+.navbar .nav > li > a, .dropdown-menu > li > a {
+  font-size      : 14px;
+  text-transform : none;
+}
+
 #login {
   min-width   : 300px;
   padding-top : 8.5px;

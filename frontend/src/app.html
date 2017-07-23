@@ -18,6 +18,59 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Projects <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="https://github.com/hartenfels/winesearch" target="_blank">
+                  <span class="fa fa-glass"></span>
+                  wineseλrch
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/hartenfels/Semantics4J" target="_blank">
+                  <span class="fa fa-coffee"></span>
+                  Semantics4J
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/hartenfels/Semserv" target="_blank">
+                  <span class="fa fa-server"></span>
+                  Semserv
+                </a>
+              </li>
+              <li>
+                <a href="https://west.uni-koblenz.de/lambda-dl" target="_blank">
+                  <span class="fa fa-university"></span>
+                  λ-DL
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Organizations <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="http://softlang.wikidot.com/" target="_blank">
+                  Software Languages Team
+                </a>
+              </li>
+              <li>
+                <a href="https://west.uni-koblenz.de/lambda-dl" target="_blank">
+                  Institute for Web Science
+                </a>
+              </li>
+              <li>
+                <a href="https://www.uni-koblenz-landau.de/en" target="_blank">
+                  University of Koblenz-Landau
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li if.bind="!user">
@@ -39,7 +92,11 @@
               ${user} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#" click.delegate="onLogout()">Log Out</a></li>
+              <li>
+                <a href="#" click.delegate="onLogout()">
+                  <span class="fa fa-sign-out"></span> Log Out
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
