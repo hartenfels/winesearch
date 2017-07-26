@@ -31,7 +31,7 @@ clean:
 	$(GRADLE) clean
 
 realclean: clean
-	rm -f WineSearch.jar
+	rm -rf public WineSearch.jar
 
 
 .PHONY: run clean realclean

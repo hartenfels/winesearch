@@ -29,6 +29,7 @@ clean:
 	rm -rf scripts*
 
 realclean: clean
+	rm -f prod
 
 
 .PHONY: dev project clean realclean
