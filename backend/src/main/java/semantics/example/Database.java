@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Database knows "wine.rdf" {
+public class Database from "wine.rdf" {
   private final Connection conn;
 
   public Database() {

@@ -17,7 +17,7 @@ import static semantics.Util.names;
 import static semantics.Util.sorted;
 
 
-public class SemanticsModel implements Model knows "wine.rdf" {
+public class SemanticsModel implements Model from "wine.rdf" {
   private Gson     gson;
   private Database db;
 
